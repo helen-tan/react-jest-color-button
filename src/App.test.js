@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { logRoles } from '@testing-library/react';
 import App from './App';
 
@@ -8,8 +8,11 @@ import App from './App';
 //   expect(linkElement).toBeInTheDocument();
 // });
 
+// Functional Testing - can have multiple assertions (expect)
+// 1. Initial - bg red, text "Change to blue"
+// 2. After clicking - bg to become blue, text to be "Change to red"
 
-test('button has correct initial color', () => {
+test('button has correct initial color, and updates when clicked', () => {
   // If you want to know the roles in <App/> destructure it into a container and run logRoles on it
   // const { container } = render(<App/>) 
   // logRoles(container)
@@ -20,10 +23,11 @@ test('button has correct initial color', () => {
   const colorButton = screen.getByRole('button', { name: 'Change to blue' })
   // 3. Assertion: Expect the background color to be red
   expect(colorButton).toHaveStyle({ backgroundColor: 'red' })
+
+  // Click button
+  fireEvent.click(colorButton)
+  expect(colorButton).toHaveStyle({ backgroundColor: 'blue' })
+  expect(colorButton).toHaveTextContent("Change to red")
 });
 
 
-
-test('button turns blue when clicked', () => {
-
-});
