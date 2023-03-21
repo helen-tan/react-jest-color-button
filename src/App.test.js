@@ -12,7 +12,7 @@ import App from './App';
 // 1. Initial - bg red, text "Change to blue"
 // 2. After clicking - bg to become blue, text to be "Change to red"
 
-test('button has correct initial color, and updates when clicked', () => {
+test('Button has correct initial color, and updates when clicked', () => {
   // If you want to know the roles in <App/> destructure it into a container and run logRoles on it
   // const { container } = render(<App/>) 
   // logRoles(container)
@@ -30,7 +30,7 @@ test('button has correct initial color, and updates when clicked', () => {
   expect(colorButton).toHaveTextContent("Change to red")
 });
 
-test('initial conditions', () => {
+test('Initial conditions', () => {
   render(<App/>)
   
   // Button to start out enabled
@@ -40,5 +40,20 @@ test('initial conditions', () => {
   // Checkbox to start unchecked
   const checkbox = screen.getByRole('checkbox')
   expect(checkbox).not.toBeChecked()
+})
+
+test('Checkbox disables button on first click and enables on second click', () => {
+  render(<App/>)
+
+  const colorButton = screen.getByRole('button', { name: 'Change to blue' })
+  const checkbox = screen.getByRole('checkbox')
+
+  // Click checkbox (checkbox checked) > Expect button to be disabled
+  fireEvent.click(checkbox)
+  expect(colorButton).toBeDisabled()
+
+  // Click Checkbox (uncheck checkbox) > Expect button to be enabled again
+  fireEvent.click(checkbox)
+  expect(colorButton).toBeEnabled()
 })
 
