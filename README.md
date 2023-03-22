@@ -9,6 +9,24 @@ A dead simple app built for learning how to test code with **Jest** and practice
   <img src="src/images/color-button-demo.gif"/>
 </p>
 
+## Concepts used
+### React Testing Library:
+1. ```render``` method for rendering the React component that we want to test into the testing environment
+2. ```screen``` object from React Testing Library provides methods for querying the rendered elements of the DOM, before we can make any assertions
+    * Identifying the element we want with ```screen.getByRole('<role_name>', { name: 'xxx' })```, using the name option 
+4. The helper function ```logRoles()``` from React Testing Library to print out a list of all implisit ARIA roles within a tree of DOM nodes. This is helpful for finding ways to query the DOM under test with ```.getByRole()```
+5. Testing interactivity with ```fireEvent```object which provides methods like ```.click()``` (from React Testing Library). ```fireEvent.click(<some_element>)``` will dispatch the click event on the specified DOM node
+
+### Jest:
+4. Jest-DOM Assertions
+    1. ```toHaveStyle()```
+    2. ```toHaveTextContent()```
+    3. ```toBeEnabled()```
+    4. ```toBeChecked()``` (for checkboxes)
+5. Jest's ```describe()``` to group tests into logical groups
+
+
+
 ## Testing
 **Tests written (in App.test.js):**
 1. Button has correct initial color, and updates when clicked 
